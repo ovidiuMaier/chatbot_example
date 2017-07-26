@@ -27,7 +27,7 @@ function makeAIcall(text) {
   });
 }
 
-async function showAgentResponse(data) {
+function showAgentResponse(data) {
   var msgs = data.result.fulfillment.messages;
   var response = msgs[0]['speech'];
   message_appender(response);
