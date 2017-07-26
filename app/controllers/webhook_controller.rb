@@ -6,7 +6,11 @@ class WebhookController < ApplicationController
       format.json {
         case params['result']['metadata']['intentName']
         when 'stackoverflow'
-          @result = "Dude, think for yourself!"
+          query = params['result']['resolvedQuery']
+          google_results = GoogleCustomSearchApi.search(query)
+          title = google_results['items'][0].title
+          link = google_results['items'][0].link
+          @result = "<a href=#{link}>#{title}<a>"
         when 'joke'
           @result = "What's the matter with you? Robots aren't funny."
         end
